@@ -2,31 +2,31 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-	agent {label: "master"}
-	options {
-		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumTokeepStr: '10'))
-		timestamps()
-	}
-	stages {
-		stage("Update apt") {
-			steps { 
-				/usr/bin/apt-get install apt
-			}
-		}
-		stage "Install nginx" {
-			steps {
-				/usr/bin/apt-get -y install nginx
-			}
-		}
-		stage "Starting nginx" {
-			steps {
-				/bin/systemctl start nginx
-			}
-		}
-		stage "Check if nginx running" {
-			steps { 
-				/bin/systemctl status nginx
-			}
-		}
-	}
+  agent {label: "master"}
+    options {
+      buildDiscarder(logRotator(numToKeepStr: '10', artifactNumTokeepStr: '10'))
+      timestamps()
+    }
+    stages {
+      stage("Update apt") {
+        steps { 
+          apt-get install apt
+        }
+      }
+      stage "Install nginx" {
+        steps {
+          apt-get -y install nginx
+        }
+      }
+      stage "Starting nginx" {
+        steps {
+          systemctl start nginx
+        }
+      }
+      stage "Check if nginx running" {
+        steps { 
+          systemctl status nginx
+        }
+      }
+    }
 }
