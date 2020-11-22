@@ -13,17 +13,17 @@ pipeline {
           sh 'apt-get install apt'
         }
       }
-      stage "Install nginx" {
+      stage ("Install nginx") {
         steps {
           sh 'apt-get -y install nginx'
         }
       }
-      stage "Starting nginx" {
+      stage ("Starting nginx") {
         steps {
           sh 'systemctl start nginx'
         }
       }
-      stage "Check if nginx running" {
+      stage ("Check if nginx running") {
         steps { 
           sh 'systemctl status nginx'
         }
